@@ -1,6 +1,6 @@
 FROM debian:bookworm-slim
 
-# Install lightweight XFCE desktop environment and VNC server
+# Install lightweight XFCE desktop environment and VNC server components
 RUN apt-get update && apt-get install -y \
     xfce4 \
     xfce4-goodies \
@@ -11,11 +11,11 @@ RUN apt-get update && apt-get install -y \
     procps \
     && apt-get clean
 
-# Setup environment variables for display
+# Setup environment variables for rendering
 ENV DISPLAY=:1
 ENV PORT=6901
 
-# Create startup script to launch the desktop and proxy on any port
+# Force the VNC engine to run without password restrictions and map websockify root 
 RUN echo '#!/bin/bash\n\
 rm -rf /tmp/.X11-unix/X1\n\
 vncserver :1 -geometry 1280x720 -depth 24 -SecurityTypes None &\n\
