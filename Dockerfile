@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 ENV DISPLAY=:1
 ENV PORT=6901
 
-# Force the VNC engine to run without password restrictions and map websockify root 
+# Fix the internal server to support secure reverse proxy traffic
 RUN echo '#!/bin/bash\n\
 rm -rf /tmp/.X11-unix/X1\n\
 vncserver :1 -geometry 1280x720 -depth 24 -SecurityTypes None &\n\
